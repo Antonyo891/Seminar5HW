@@ -10,18 +10,18 @@ int Enter(string n)
     int result = int.Parse(Console.ReadLine());
     return result;
 }
-double [] InAr (string array)
+double [] GetRanArrDouble(int size)
 {
-    string [] Nums = array.Split(" ");
-    double [] NumDoub = new double[Nums.Length];
-    for (int i = 0; i<Nums.Length; i++) NumDoub[i]=double.Parse(Nums[i]);
-    return NumDoub;
+    double[] result = new double[size];
+    for (int i = 0; i < size; i++) result[i] = new Random().NextDouble()*100;
+    return result;
 }
 double DifMaxMin(double[] array)
 {
-    double result = 0, max=0, min=0;
+    double result = 0, max=array[0], min=array[0];
         foreach (double el in array) if (el>max) max = el;
         else if(el<min) min = el;
+       // System.Console.WriteLine($"Max = {max}     min = {min}");
         result = max - min; 
     return result;
 }
@@ -31,8 +31,7 @@ void PrintAr(double [] array)
     System.Console.WriteLine();
 }
 Console.Clear();
-System.Console.WriteLine("Введите массив чисел через пробел");
-string Str = Console.ReadLine();
-double[] array = InAr(Str);
+int size = Enter("Введите количество чисел в массиве");
+double[] array = GetRanArrDouble(size);
 PrintAr(array);
-Console.WriteLine($"{String.Join(" ", array)} ==> {DifMaxMin(array):f0}");
+Console.WriteLine($"Разница между максимальным и минимальным элементами массива = {DifMaxMin(array):f2}");
